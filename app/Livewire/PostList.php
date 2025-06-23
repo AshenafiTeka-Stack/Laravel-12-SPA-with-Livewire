@@ -14,7 +14,7 @@ class PostList extends Component
 
     public function render()
     {
-        $posts = Post::paginate(5);
+        $posts = Post::orderBy('id', 'DESC')->paginate(5);
         return view('livewire.post-list', compact('posts'));
     }
 }

@@ -58,7 +58,7 @@
                                 </p>
                             </td>
                             <td>
-                                <a href="" class="btn btn-success btn-sm">Edit</a>
+                                <a href="{{ route('posts.edit', $post->id) }}" wire:navigate class="btn btn-success btn-sm">Edit</a>
                                 <button type="button" class="btn btn-danger btn-sm">Delete</button>
                             </td>
 

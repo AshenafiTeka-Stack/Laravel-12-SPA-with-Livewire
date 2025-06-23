@@ -8,7 +8,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-xl-6">
-                                <h5 class="fw-bold ">{{$isView ? 'View' : 'Create' }} Post</h5>
+                                <h5 class="fw-bold ">{{$isView ? 'View' : ($post ? 'Edit' : 'Create') }} Post</h5>
                             </div>
                             <div class="col-xl-6 text-end">
                                 <a wire:navigate href="{{ route('posts') }}" class="btn btn-primary btn-sm ">Back to
@@ -77,7 +77,7 @@
                     @if (!$isView)
                         <div class="card-footer">
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary ">Save</button>
+                                <button type="submit" class="btn btn-primary ">{{ $post ? 'Update' : 'Save'}}</button>
                             </div>
                         </div>
                     @endif
