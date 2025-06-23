@@ -6,11 +6,14 @@ use App\Models\Post;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Livewire\Attributes\Title;
+
 
 class PostForm extends Component
 {
     use WithFileUploads;
 
+    #[Title('Add Post ')]
     public $post = null;
     public $isView = false;
 
@@ -40,7 +43,7 @@ class PostForm extends Component
         $this->validate();
 
         $rules = [
-            'featuredImage' => $this->post &&```````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````` $this->post->featured_image ? 'nullable|image|mimes:jpg,jpeg,png,svg,bmp,webp,gif|max:2048' : 'required|image|mimes:jpg,jpeg,png,svg,bmp,webp,gif|max:2048',
+            'featuredImage' => $this->post && $this->post->featured_image ? 'nullable|image|mimes:jpg,jpeg,png,svg,bmp,webp,gif|max:2048' : 'required|image|mimes:jpg,jpeg,png,svg,bmp,webp,gif|max:2048',
         ];
 
         $messages = [
