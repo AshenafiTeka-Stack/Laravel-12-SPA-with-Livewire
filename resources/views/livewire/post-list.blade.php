@@ -27,16 +27,70 @@
     </div>
 
     {{-- Table post listing --}}
-    <div class="card shadow">
-        <div class="card-body mt-4 table-responsive">
+    <div class="card ">
+        <div class="card-body mt-4 table-responsive shadow">
+
+            {{-- Search Blog Post --}}
+            <div class="my-3 col-xl-4 ms-auto">
+                <input type="text" class="form-control" placeholder="Search Blog Post"
+                    wire:model.live.debounce="searchTerm" />
+            </div>
+
+
+
             <table class="table table-striped ">
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Featured Image</th>
-                        <th>Title</th>
-                        <th>Content</th>
-                        <th>Date</th>
+                        <th>Featured Image
+                            <span wire:click="sortBy('featured_image')">
+                                @if ($sortColumn === 'featured_image')
+                                    @if ($sortOrder === 'asc')
+                                        <i class="fa-solid fa-sort-up"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    @endif
+                                @else
+                                    <i class="fa-solid fa-sort"></i>
+                                @endif
+                            </span>
+                        </th>
+                        <th>Title <span wire:click="sortBy('title')">
+                            @if ($sortColumn === 'title')
+                                    @if ($sortOrder === 'asc')
+                                        <i class="fa-solid fa-sort-up"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    @endif
+                                @else
+                                    <i class="fa-solid fa-sort"></i>
+                                @endif
+                        </span>
+                    </th>
+                        <th>Content <span wire:click="sortBy('content')">
+                            @if ($sortColumn === 'content')
+                                    @if ($sortOrder === 'asc')
+                                        <i class="fa-solid fa-sort-up"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    @endif
+                                @else
+                                    <i class="fa-solid fa-sort"></i>
+                                @endif
+                        </span>
+                    </th>
+                        <th>Date <span wire:click="sortBy('created_at')">
+                            @if ($sortColumn === 'created_at')
+                                    @if ($sortOrder === 'asc')
+                                        <i class="fa-solid fa-sort-up"></i>
+                                    @else
+                                        <i class="fa-solid fa-sort-down"></i>
+                                    @endif
+                                @else
+                                    <i class="fa-solid fa-sort"></i>
+                                @endif
+                        </span>
+                    </th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -44,8 +98,11 @@
                     @forelse ($posts as $post)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td><a wire:navigate href="{{ route('posts.view', $post->id) }}"><img src="{{ Storage::url($post->featured_image) }}" class="img-fluid" width="100px" /></a></td>
-                            <td><a class="text-decoration-none" wire:navigate href="{{ route('posts.view', $post->id) }}"> {{ $post->title }} </a> </td>
+                            <td><a wire:navigate href="{{ route('posts.view', $post->id) }}"><img
+                                        src="{{ Storage::url($post->featured_image) }}" class="img-fluid"
+                                        width="100px" /></a></td>
+                            <td><a class="text-decoration-none" wire:navigate href="{{ route('posts.view', $post->id) }}">
+                                    {{ $post->title }} </a> </td>
                             <td>{{ $post->content }}</td>
                             <td>
                                 <p>
@@ -58,8 +115,11 @@
                                 </p>
                             </td>
                             <td>
-                                <a href="{{ route('posts.edit', $post->id) }}" wire:navigate class="btn btn-success btn-sm">Edit</a>
-                                <button wire:confirm="Are you sure, you want to delete?" wire:click="deletePost({{ $post->id }})" type="button" class="btn btn-danger btn-sm">Delete</button>
+                                <a href="{{ route('posts.edit', $post->id) }}" wire:navigate
+                                    class="btn btn-success btn-sm">Edit</a>
+                                <button wire:confirm="Are you sure, you want to delete?"
+                                    wire:click="deletePost({{ $post->id }})" type="button"
+                                    class="btn btn-danger btn-sm">Delete</button>
                             </td>
 
                         </tr>
@@ -68,7 +128,7 @@
                     @endforelse
                 </tbody>
             </table>
-           {{ $posts->links() }}
+            {{ $posts->links() }}
         </div>
 
     </div>
